@@ -64,4 +64,7 @@ jobs:
           git commit -m "Update image to ${{ env.VERSION }}"
 
           git push
+
+      - name: deploy
+        run: kubectl apply -f manifests/axion-ui-deployment.yaml
   
