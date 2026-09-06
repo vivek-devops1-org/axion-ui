@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: axion-ui
-        image: acr22.azurecr.io/vivek-axion-ui:v6
+        image: acr22.azurecr.io/vivek-axion-ui:v7
         ports:
         - containerPort: 80
