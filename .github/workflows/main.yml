@@ -34,3 +34,38 @@ jobs:
 
       - name: push to ACR
         run: docker push ${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
+
+      # ---------------------------------
+      # Update deployment.yaml
+      # ---------------------------------
+      - name: Update Kubernetes Manifest
+        shell: powershell
+        run: |
+          $file = "manifests/axion-ui-deployment.yaml"
+      
+          $newImage = "${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}}"
+      
+          (Get-Content $file) `
+            -replace 'image:.*', "image: $newImage" |
+            Set-Content $file
+      
+          Write-Host "Updated deployment.yaml"
+      
+          Get-Content $file
+
+      # ---------------------------------
+      # Commit changes back
+      # ---------------------------------
+      - name: Commit and Push Changes
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
+
+          git add manifests/axion-ui-deployment.yaml
+
+          git commit -m "Update image to ${{ env.VERSION }}"
+
+          git push
+
+      - name: deploy app
+        run: kubectl apply -f manifests/axion-ui-deployment.yaml
