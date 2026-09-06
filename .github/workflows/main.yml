@@ -6,6 +6,7 @@ permissions:
   id-token: write
 env:
   IMAGE_NAME: vivek-axion-ui
+  VERSION: v${{github.run_number}}
   CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
   SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
@@ -27,3 +28,9 @@ jobs:
 
       - name: login ACR
         run: az acr login --name ${{env.ACR_SERVER}}
+
+      - name: image build and tag
+        run: docker build -t ${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}} .
+
+      - name: push to ACR
+        run: docker push ${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
