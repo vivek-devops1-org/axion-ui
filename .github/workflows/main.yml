@@ -1,0 +1,16 @@
+name: Build and Push to ACR
+on: workflow_dispatch
+permissions: 
+  id-token: write
+  contents: write
+env:
+  IMAGE_NAME: vivek-axion-ui
+  VERSION: v${{github.run_number}}
+jobs:
+  Build-and-push:
+    name: build the image and push to the acr
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+  
