@@ -9,6 +9,7 @@ env:
   CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
   SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+  ACR_SERVER: ${{secrets.ACR_LOGIN_SERVER}}
 jobs:
   Build-and-push:
     name: build-push
@@ -23,4 +24,6 @@ jobs:
           client-id: ${{env.CLIENT_ID}}
           tenant-id: ${{env.TENANT_ID}}
           subscription-id: ${{env.SUBSCRIPTION_ID}}
-    
+
+      - name: login ACR
+        run: az acr login --name ${{env.ACR_SERVER}}
