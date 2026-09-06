@@ -4,3 +4,12 @@ on:
 permissions:
   contents: write
   id-token: write
+env:
+  IMAGE_NAME: vivek-axion-ui
+jobs:
+  Build-and-push:
+    name: build-push
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0  
