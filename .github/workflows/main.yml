@@ -27,3 +27,9 @@ jobs:
 
       - name: Login ACR
         run: az acr login --name ${{env.ACR_SERVER}}
+
+      - name: tag image
+        run: docker build -t ${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}} .
+
+      - name: push to acr
+        run: docker push ${{env.ACR_SERVER}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
