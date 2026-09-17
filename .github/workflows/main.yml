@@ -5,7 +5,7 @@ permissions:
   contents: write
   id-token: write
 env:
-  IMAGE_NAME: vivek-axion-ui
+  IMAGE_NAME: axion-ui
   VERSION: v${{github.run_number}}
   CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
   TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
