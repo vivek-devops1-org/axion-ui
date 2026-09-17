@@ -67,5 +67,5 @@ jobs:
 
           git push
 
-      - name: deploy app
-        run: kubectl apply -f manifests/axion-ui-deployment.yaml
+      # - name: deploy app
+      #   run: kubectl apply -f manifests/axion-ui-deployment.yaml
