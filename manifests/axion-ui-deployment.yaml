@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: axion-ui
-        image: clusteraliregistry.azurecr.io/axion-ui:v24
+        image: clusteraliregistry.azurecr.io/axion-ui:v26
         ports:
         - containerPort: 80
